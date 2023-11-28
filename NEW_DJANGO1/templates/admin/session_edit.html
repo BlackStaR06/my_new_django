@@ -1,0 +1,35 @@
+{% extends 'admin/index.html' %}
+{% block content %}
+<div class="col-lg-6">
+    <div class="card">
+        <form action="{% url 'session_update' %}" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             {% include '../components/msg.html' %}
+             <div class="card-body card-block">
+                 <input name="id" value="{{ session.id }}" required type="text" placeholder="" class="form-control">
+                <div class="form-group">
+                    <label class=" form-control-label">Course start date</label>
+                    <input name="session_start" value="{{ session.session_start }}" required type="date" placeholder="" class="form-control">
+                </div>
+                 <div class="form-group">
+                    <label class=" form-control-label">Course end date</label>
+                    <input name="session_end" value="{{ session.session_end }}" required type="date" placeholder="" class="form-control">
+                </div>
+             <button class="btn btn-info">Update</button>
+             </div>
+        </form>
+ </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result)
+                }
+                reader.readAsDataURL(e.target.files['0'])
+            })
+        })
+    </script>
+{% endblock %}

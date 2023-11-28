@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <div class="container p-5">
+        <div class="col-lg-8">
+            <div class="offset-lg-2">
+                <div class="card p-5">
+                    <h5 class="card-title">Login</h5>
+                    {% include 'components/msg.html' %}
+                    <a href="{% url 'register' %}"><button class="btn btn-primary ml-165">Register page</button></a>
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Email address</label>
+                            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Email address">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label">Check me out</label>
+                        </div>
+                        <a href=""><button type="submit" class="btn btn-primary mb-5 mt-5">Submit</button></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

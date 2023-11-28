@@ -1,0 +1,87 @@
+{% extends 'admin/index.html' %}
+{% block content %}
+ <div class="col-lg-6">
+     <div class="card">
+         <div class="card-header"><strong>Company</strong><small>Form</small></div>
+         <form action="{% url 'student_add' %}" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             {% include '../components/msg.html' %}
+             <div class="card-body card-block">
+                <div class="form-group">
+                    <label class=" form-control-label">First name</label>
+                    <input name="first_name" required type="text" placeholder="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Last name</label>
+                    <input name="last_name" required type="text" placeholder="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Username</label>
+                    <input name="username" required type="text" placeholder="" class="form-control">
+                </div>
+                <div class="row form-group">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label class=" form-control-label">Email</label>
+                            <input name="email" required type="email" placeholder="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label class=" form-control-label">Password</label>
+                            <input name="password" required type="password" placeholder="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Profile picture</label>
+                            <input name="profile_pic" id="image" type="file" class="form-control">
+                            <div class="form-group">
+                                <img id="showImage" width="150" class="rounded" src="" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-12 col-md-9">
+                        <label class=" form-control-label">Choose your gender</label>
+                        <select name="gender" class="form-control">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <br>
+                        <label class=" form-control-label">Choose course</label>
+                        <select name="course_id" class="form-control">
+                            {% for i in course %}
+                            <option value="{{ i.id }}">{{ i.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <label class=" form-control-label">Choose time</label>
+                        <select name="session_time" class="form-control">
+                            {% for i in session %}
+                            <option value="{{ i.id }}">From {{ i.session_start }} to {{ i.session_start }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Address</label>
+                    <input name="address" required type="text" placeholder="" class="form-control">
+                </div>
+             </div>
+             <button class="btn btn-primary">Add student</button>
+         </form>
+     </div>
+ </div>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result)
+                }
+                reader.readAsDataURL(e.target.files['0'])
+            })
+        })
+    </script>
+{% endblock %}

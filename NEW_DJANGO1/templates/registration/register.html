@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <div class="container p-5">
+        <div class="col-lg-8">
+            <div class="offset-lg-2">
+                <div class="card p-5">
+                    <h5 class="card-title">Registration</h5>
+                    {% include 'components/msg.html' %}
+                    <a href="{% url 'login' %}"><button class="btn btn-primary ml-165">Login page</button></a>
+                    <form method="post" enctype="multipart/form-data" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Email address</label>
+                            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Email address">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="form-group">
+                            <label >Username</label>
+                            <input type="text" name="username" class="form-control" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <select name="user_type" id="">
+                                <option value="">-- choose status--</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Teacher</option>
+                                <option value="3">Student</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Picture</label>
+                            <input type="file" name="profile_pic" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm your password</label>
+                            <input type="password" class="form-control"  placeholder="Confirm your password">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input">
+                            <label class="form-check-label">Check me out</label>
+                        </div>
+                    <button type="submit" class="btn btn-primary mb-5 mt-5">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
